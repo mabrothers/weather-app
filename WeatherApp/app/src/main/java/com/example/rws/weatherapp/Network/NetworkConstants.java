@@ -6,7 +6,9 @@ package com.example.rws.weatherapp.Network;
 
 public class NetworkConstants {
 
-    public static final String BASE_SERVER = "api.openweathermap.org/data/2.5/";
+    public static final String LOG_TAG = "Network";
+
+    public static final String BASE_SERVER = "http://api.openweathermap.org/data/2.5/";
     public static final String CURRENT_ENDPOINT = BASE_SERVER + "weather";
     public static final String FORECAST_ENDPOINT = BASE_SERVER + "forecast";
 
