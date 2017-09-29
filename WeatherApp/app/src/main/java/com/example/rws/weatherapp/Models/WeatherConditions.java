@@ -22,4 +22,14 @@ public class WeatherConditions {
      * parse for either local or remote image
      */
     public String icon;
+
+    @Override
+    public String toString() {
+        return "WeatherConditions{" +
+                "id='" + id + '\'' +
+                ", main='" + main + '\'' +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                '}';
+    }
 }

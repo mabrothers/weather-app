@@ -30,5 +30,16 @@ public class PartialDayForecast {
      */
     public String dt_txt;
 
+    @Override
+    public String toString() {
+        return "PartialDayForecast{" +
+                "main=" + main +
+                ", weather=" + weather +
+                ", clouds=" + clouds +
+                ", wind=" + wind +
+                ", dt=" + dt +
+                ", dt_txt='" + dt_txt + '\'' +
+                '}';
+    }
 }
 

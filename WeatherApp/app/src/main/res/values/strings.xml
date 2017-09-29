@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Weather App</string>
+
+    <string name="poc_city_id">City ID</string>
+    <string name="poc_city_zip">Zip Code</string>
+    <string name="poc_city_lat">Latitude</string>
+    <string name="poc_city_lon">Longitude</string>
+    <string name="poc_city_name">City Name</string>
+    <string name="poc_country">Country Code</string>
+    <string name="poc_btn_current">Current</string>
+    <string name="poc_btn_forecast">Forecast</string>
+
+
+    <string name="poc_error_input">Please enter search criteria</string>
 </resources>

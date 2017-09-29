@@ -7,6 +7,15 @@ package com.example.rws.weatherapp.Models;
 public class Coordinates {
 
     public String lat; //parse as Strings for safety
+
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "lat='" + lat + '\'' +
+                ", lon='" + lon + '\'' +
+                '}';
+    }
+
     public String lon;
 
 }

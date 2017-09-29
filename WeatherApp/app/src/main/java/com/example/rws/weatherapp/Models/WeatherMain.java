@@ -13,4 +13,12 @@ public class WeatherMain {
     public String pressure;
     public String humidity;
 
+    @Override
+    public String toString() {
+        return "WeatherMain{" +
+                "temp='" + temp + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", humidity='" + humidity + '\'' +
+                '}';
+    }
 }

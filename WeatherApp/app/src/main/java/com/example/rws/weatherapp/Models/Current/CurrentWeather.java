@@ -15,6 +15,8 @@ import java.util.List;
 public class CurrentWeather {
 
     public WeatherMain main;
+
+
     public Coordinates coord;
     public List<WeatherConditions> weather;
     public Wind wind;
@@ -41,4 +43,19 @@ public class CurrentWeather {
      */
     public String name;
 
+    @Override
+    public String toString() {
+        return "CurrentWeather{" +
+                "main=" + main +
+                ", coord=" + coord +
+                ", weather=" + weather +
+                ", wind=" + wind +
+                ", clouds=" + clouds +
+                ", sys=" + sys +
+                ", visibility=" + visibility +
+                ", dt=" + dt +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -18,4 +18,12 @@ public class SystemData {
     public long sunset;
 
 
+    @Override
+    public String toString() {
+        return "SystemData{" +
+                "country='" + country + '\'' +
+                ", sunrise=" + sunrise +
+                ", sunset=" + sunset +
+                '}';
+    }
 }

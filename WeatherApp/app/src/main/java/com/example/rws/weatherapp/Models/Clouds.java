@@ -11,4 +11,10 @@ public class Clouds {
      */
     public String all;
 
+    @Override
+    public String toString() {
+        return "Clouds{" +
+                "all='" + all + '\'' +
+                '}';
+    }
 }
