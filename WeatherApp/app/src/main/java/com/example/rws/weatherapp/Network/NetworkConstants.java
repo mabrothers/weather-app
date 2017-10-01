@@ -12,6 +12,8 @@ public class NetworkConstants {
     public static final String CURRENT_ENDPOINT = BASE_SERVER + "weather";
     public static final String FORECAST_ENDPOINT = BASE_SERVER + "forecast";
 
+    public static final String ICON_ENDPOINT = "http://openweathermap.org/img/w/%1$s.png";
+
 
     public static final String KEY_APP_ID = "APPID";
 

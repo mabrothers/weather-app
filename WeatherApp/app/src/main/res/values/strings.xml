@@ -12,4 +12,36 @@
 
 
     <string name="poc_error_input">Please enter search criteria</string>
+
+    <string name="mvp_hint_city_name">City Name</string>
+    <string name="mvp_hint_country">Country Code</string>
+    <string name="mvp_hint_zip">Zip Code</string>
+
+    <string name="mvp_or">OR</string>
+
+    <string name="mvp_switch_units">Units</string>
+    <string name="mvp_switch_off">F</string>
+    <string name="mvp_switch_on">C</string>
+
+    <string name="mvp_adapter_current_header">Current Conditions</string>
+    <string name="mvp_adapter_label_wind">Wind</string>
+    <string name="mvp_adapter_label_humidity">Humidity</string>
+    <string name="mvp_adapter_label_pressure">Pressure</string>
+    <string name="mvp_adapter_label_clouds">Clouds</string>
+    <string name="mvp_adapter_value_temp">%1$s&#176;</string>
+    <string name="mvp_adapter_value_humid">%1$s\%</string>
+    <string name="mvp_adapter_value_pressure">%1$s hPa</string>
+    <string name="mvp_adapter_value_cloud">%1$s\%</string>
+
+    <string name="mvp_direction_n">N</string>
+    <string name="mvp_direction_ne">NE</string>
+    <string name="mvp_direction_e">E</string>
+    <string name="mvp_direction_se">SE</string>
+    <string name="mvp_direction_s">S</string>
+    <string name="mvp_direction_sw">SW</string>
+    <string name="mvp_direction_w">W</string>
+    <string name="mvp_direction_nw">NW</string>
+
+    <string name="mvp_speed_imperial">MPH</string>
+    <string name="mvp_speed_metric">Meters/Second</string>
 </resources>

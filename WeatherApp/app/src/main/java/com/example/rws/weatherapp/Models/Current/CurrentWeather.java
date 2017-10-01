@@ -5,6 +5,7 @@ import com.example.rws.weatherapp.Models.Coordinates;
 import com.example.rws.weatherapp.Models.WeatherConditions;
 import com.example.rws.weatherapp.Models.WeatherMain;
 import com.example.rws.weatherapp.Models.Wind;
+import com.example.rws.weatherapp.UI.DisplayItem;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by Marx on 9/27/2017.
  */
 
-public class CurrentWeather {
+public class CurrentWeather implements DisplayItem {
 
     public WeatherMain main;
 
@@ -57,5 +58,10 @@ public class CurrentWeather {
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int displayType() {
+        return DISPLAY_TYPE_CURRENT;
     }
 }
