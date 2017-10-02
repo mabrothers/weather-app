@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rws.weatherapp.Models.Current.CurrentWeather;
 import com.example.rws.weatherapp.Models.Forecast.Forecast;
@@ -150,7 +151,7 @@ public class MVPActivity extends AppCompatActivity {
                 }
             }).start();
         } else {
-            //TODO show error
+            Toast.makeText(getApplicationContext(), R.string.mvp_error_input, Toast.LENGTH_SHORT).show();
             isLoading.set(false);
             switchUnits.setClickable(true);
         }

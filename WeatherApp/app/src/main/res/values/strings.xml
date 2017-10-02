@@ -49,6 +49,7 @@
 
     <string name="mvp_adapter_forecast_header">5 Day Forecast</string>
 
+    <string name="mvp_error_input">Please either enter a city or zip code</string>
 
 
 </resources>
