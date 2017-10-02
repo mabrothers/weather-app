@@ -2,6 +2,7 @@ package com.example.rws.weatherapp.UI;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.squareup.picasso.Picasso;
 
 public class CurrentViewHolder extends AbsViewHolder {
 
+    protected final TextView lblCurrent;
     protected final TextView lblTemp;
     protected final ImageView imgCondition;
     protected final LinearLayout llConditions;
@@ -32,6 +34,7 @@ public class CurrentViewHolder extends AbsViewHolder {
 
     public CurrentViewHolder(Context context) {
         super(((LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.adapter_mvp_current, null));
+        lblCurrent = (TextView)itemView.findViewById(R.id.lbl_current);
         lblTemp = (TextView)itemView.findViewById(R.id.lbl_temp);
         imgCondition = (ImageView)itemView.findViewById(R.id.img_condition);
         llConditions = (LinearLayout)itemView.findViewById(R.id.ll_conditions);
@@ -39,17 +42,18 @@ public class CurrentViewHolder extends AbsViewHolder {
         lblWind = (TextView)itemView.findViewById(R.id.lbl_wind_value);
         lblPressure = (TextView)itemView.findViewById(R.id.lbl_pressure_value);
         lblClouds = (TextView)itemView.findViewById(R.id.lbl_clouds_value);
-
+        itemView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
     }
 
     public void setData(final CurrentWeather data, final Context context, final String units){
         if(data == null){
             return;
         }
-        lblTemp.setText(context.getResources().getString(R.string.mvp_adapter_value_temp, data.main.temp));
-        lblHumidity.setText(context.getResources().getString(R.string.mvp_adapter_value_humid, data.main.humidity));
+        lblCurrent.setText(context.getResources().getString(R.string.mvp_adapter_current_header, data.name));
+        lblTemp.setText(context.getResources().getString(R.string.mvp_adapter_value_temp, FormatUtil.formatTemp(data.main.temp)));
+        lblHumidity.setText(data.main.humidity.concat("%"));
         lblPressure.setText(context.getResources().getString(R.string.mvp_adapter_value_pressure, data.main.pressure));
-        lblClouds.setText(context.getResources().getString(R.string.mvp_adapter_value_cloud, data.clouds.all));
+        lblClouds.setText(data.clouds.all.concat("%"));
         String speedUnits;
         switch (units){
             case NetworkConstants.VALUE_IMPERIAL:
@@ -63,10 +67,11 @@ public class CurrentViewHolder extends AbsViewHolder {
                 break;
         }
         lblWind.setText(new StringBuilder()
+                .append(FormatUtil.getDirection(context, data.wind.deg))
+                .append(" ")
                 .append(data.wind.speed)
                 .append(" ")
-                .append(speedUnits)
-                .append(FormatUtil.getDirection(context, data.wind.deg)));
+                .append(speedUnits));
         try{
             Picasso.with(context).load(String.format(NetworkConstants.ICON_ENDPOINT, data.weather.get(0).icon)).into(imgCondition);
         } catch (Exception e){

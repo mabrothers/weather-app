@@ -1,6 +1,9 @@
 package com.example.rws.weatherapp.Utils;
 
 import android.content.Context;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import com.example.rws.weatherapp.R;
 
@@ -10,6 +13,16 @@ import com.example.rws.weatherapp.R;
 
 public class FormatUtil {
 
+    protected static final DecimalFormat TEMP_FORMAT = new DecimalFormat("0");
+
+    public final static SimpleDateFormat HOURLY_FORMAT = new SimpleDateFormat("h a", Locale.US);
+    public final static SimpleDateFormat FULL_DATE_FORMAT = new SimpleDateFormat("EE, MMM d yyyy", Locale.getDefault());
+
+    public static String formatTemp(final String temp){
+        return TEMP_FORMAT.format(Float.parseFloat(temp));
+    }
+
+
     /**
      *
      * @param context Application context
@@ -17,7 +30,6 @@ public class FormatUtil {
      * @return Localized String representation of one of 8 compass points, or null if no point could be parsed
      */
     public static String getDirection(final Context context, final String deg){
-
 
         // 22.5 each way
         //0 N           337-359,0-22
@@ -31,7 +43,7 @@ public class FormatUtil {
 
         int resource = -1;
         try{
-            final int degrees = Integer.valueOf(deg) % 360;
+            final float degrees = Float.valueOf(deg) % 360;
             if((degrees >=0 && degrees <= 22) || (degrees >= 337 && degrees <= 359)){
                 resource = R.string.mvp_direction_n;
             } else if(degrees >= 23 && degrees <= 67){

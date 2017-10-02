@@ -9,7 +9,7 @@
 
     <android.support.percent.PercentRelativeLayout
         android:paddingTop="5dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -23,6 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
+            android:nextFocusDown="@+id/txt_country"
+            android:nextFocusRight="@+id/txt_country"
+            android:nextFocusUp="@+id/txt_country"
+            android:nextFocusLeft="@+id/txt_country"
             android:hint="@string/mvp_hint_city_name"
             android:textSize="12sp"
             android:ems="10"
@@ -49,6 +53,10 @@
             android:textColorHint="@color/white"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lbl_or"
+            android:nextFocusDown="@+id/txt_country"
+            android:nextFocusRight="@+id/txt_country"
+            android:nextFocusUp="@+id/txt_country"
+            android:nextFocusLeft="@+id/txt_country"
             android:textSize="12sp"
             android:layout_alignParentStart="true"
             android:hint="@string/mvp_hint_zip"
@@ -116,10 +124,30 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="1dp" />-->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:background="@color/colorPrimary"
+    <android.support.percent.PercentFrameLayout
+        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/img_earth"
+            android:layout_gravity="center"
+            app:layout_widthPercent="90%"
+            app:layout_aspectRatio="100%"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/earth" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_gravity="center_horizontal"
+            android:overScrollMode="never"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.percent.PercentFrameLayout>
+
 
 </LinearLayout>

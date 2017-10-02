@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/lbl_header"
+        android:gravity="center"
+        android:background="@color/white_90"
+        android:layout_gravity="center"
+        app:layout_widthPercent="100%"
+        app:layout_aspectRatio="900%"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/mvp_adapter_forecast_header" />
+</android.support.percent.PercentFrameLayout>

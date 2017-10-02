@@ -6,9 +6,10 @@ package com.example.rws.weatherapp.UI;
 
 public interface DisplayItem {
 
-    public static final int DISPLAY_TYPE_CURRENT = 1;
-    public static final int DISPLAY_TYPE_DAY_HEADER = 2;
-    public static final int DISPLAY_TYPE_PARTIAL_DAY = 3;
+    int DISPLAY_TYPE_CURRENT = 1;
+    int DISPLAY_TYPE_FORECAST_HEADER = 2;
+    int DISPLAY_TYPE_DAY_HEADER = 3;
+    int DISPLAY_TYPE_PARTIAL_DAY = 4;
 
     int displayType();
 }
