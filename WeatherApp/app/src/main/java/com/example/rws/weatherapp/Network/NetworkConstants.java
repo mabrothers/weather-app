@@ -22,7 +22,7 @@ public class NetworkConstants {
      */
     public static final String KEY_CITY_NAME = "q";
     public static final String KEY_ZIP_CODE = "zip";
-    public static final String KEY_CITY_ID = "id";
+    public static final String KEY_CITY_ID = "place_id";
     public static final String KEY_LATITUDE = "lat";
     public static final String KEY_LONGITUDE = "lon";
 
@@ -33,4 +33,10 @@ public class NetworkConstants {
 
 
     //TODO language (lang) may be added at a later point
+
+    public static final String GOOGLE_AUTO_COMPLETE_ENDPOINT = "https://maps.googleapis.com/maps/api/place/autocomplete/json";
+    public static final String GOOGLE_PLACE_DETAILS_ENDPOINT = "https://maps.googleapis.com/maps/api/place/details/json";
+    public static final String KEY_GOOGLE_API = "key";
+    public static final String KEY_GOOGLE_QUERY = "input";
+    public static final String KEY_GOOGLE_PLACE_ID = "placeid";
 }

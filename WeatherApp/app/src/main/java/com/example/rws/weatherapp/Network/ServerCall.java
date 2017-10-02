@@ -11,10 +11,8 @@ import java.util.List;
  * Created by Marx on 9/27/2017.
  */
 
-public class ServerCall {
+public class ServerCall extends BaseServerCall{
 
-    public String endpoint;
-    public final List<QueryParameter> parameters = new ArrayList<>();
 
     public ServerCall(final Context context){
 

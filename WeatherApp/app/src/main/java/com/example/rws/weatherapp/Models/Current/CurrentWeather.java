@@ -55,7 +55,7 @@ public class CurrentWeather implements DisplayItem {
                 ", sys=" + sys +
                 ", visibility=" + visibility +
                 ", dt=" + dt +
-                ", id='" + id + '\'' +
+                ", place_id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }

@@ -51,5 +51,6 @@
 
     <string name="mvp_error_input">Please either enter a city or zip code</string>
 
+    <string name="enhanced_hint_input">Search Location</string>
 
 </resources>

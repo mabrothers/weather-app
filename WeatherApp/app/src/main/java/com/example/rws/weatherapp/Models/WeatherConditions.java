@@ -26,7 +26,7 @@ public class WeatherConditions {
     @Override
     public String toString() {
         return "WeatherConditions{" +
-                "id='" + id + '\'' +
+                "place_id='" + id + '\'' +
                 ", main='" + main + '\'' +
                 ", description='" + description + '\'' +
                 ", icon='" + icon + '\'' +

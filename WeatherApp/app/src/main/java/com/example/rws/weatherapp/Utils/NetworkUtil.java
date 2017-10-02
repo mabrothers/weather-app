@@ -3,6 +3,7 @@ package com.example.rws.weatherapp.Utils;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.rws.weatherapp.Network.BaseServerCall;
 import com.example.rws.weatherapp.Network.NetworkConstants;
 import com.example.rws.weatherapp.Network.QueryParameter;
 import com.example.rws.weatherapp.Network.ServerCall;
@@ -18,6 +19,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by Marx on 9/27/2017.
  */
@@ -26,8 +29,7 @@ public class NetworkUtil {
 
 
 
-
-    public static String get(final ServerCall call) throws IOException{
+    public static String get(final BaseServerCall call) throws IOException{
         final URL url;
         if(!call.parameters.isEmpty()){
             Uri.Builder builder = new Uri.Builder();
