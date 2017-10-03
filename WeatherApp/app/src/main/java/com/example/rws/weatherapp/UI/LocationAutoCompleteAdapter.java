@@ -59,6 +59,7 @@ public class LocationAutoCompleteAdapter extends ArrayAdapter<Prediction> implem
             if(constraint == null || constraint.length() < MIN_SEARCH_LENGTH){
                 return null;
             }
+            //If we went into production we'd want to delay sending this call off to lower our costs
             new Thread(new Runnable() {
                 @Override
                 public void run() {

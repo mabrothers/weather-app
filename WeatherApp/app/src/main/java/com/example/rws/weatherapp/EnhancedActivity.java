@@ -1,5 +1,11 @@
 package com.example.rws.weatherapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.rws.weatherapp.Models.Current.CurrentWeather;
 import com.example.rws.weatherapp.Models.Forecast.Forecast;
@@ -21,6 +28,7 @@ import com.example.rws.weatherapp.Network.NetworkConstants;
 import com.example.rws.weatherapp.Network.QueryParameter;
 import com.example.rws.weatherapp.Network.ServerCall;
 import com.example.rws.weatherapp.UI.LocationAutoCompleteAdapter;
+import com.example.rws.weatherapp.Utils.FormatUtil;
 import com.example.rws.weatherapp.Utils.LocationUtil;
 import com.example.rws.weatherapp.Utils.NetworkUtil;
 import com.example.rws.weatherapp.Utils.StringUtil;
@@ -33,6 +41,7 @@ public class EnhancedActivity extends AppCompatActivity {
 
     protected final int UNITS_F = 0;
     protected final int UNITS_C = 1;
+    protected final int LOCATION_REQUEST_CODE = 1001;
 
     protected int units = UNITS_F;
 
@@ -80,6 +89,9 @@ public class EnhancedActivity extends AppCompatActivity {
                 units = isChecked ? UNITS_C : UNITS_F;
                 adapter.setUnits(getUnitsString());
                 if(current != null && isLoading.compareAndSet(false, true)){
+                    adapter.clearData();
+                    progress.setIndeterminate(true);
+                    switchUnits.setClickable(false);
                     search();
                 }
             }
@@ -99,21 +111,35 @@ public class EnhancedActivity extends AppCompatActivity {
 
             }
         });
+        flGPS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLocationPermissions();
+            }
+        });
     }
 
+    /**
+     * We have a prediction from Google Places, grab the details so we can get the lat,lon
+     */
     protected void getDetails(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //get place details
                 final PlaceDetails placeDetails = LocationUtil.getPlace(getApplicationContext(), lastPrediction.place_id);
-                lastLat = placeDetails.getLat();
-                lastLon = placeDetails.getLon();
-                search();
+                if(placeDetails != null){
+                    lastLat = placeDetails.getLat();
+                    lastLon = placeDetails.getLon();
+                    search();
+                }
             }
         }).start();
     }
 
+    /**
+     * We've gotten the lat & lon from some source, send it up to OWM to get the weather.
+     */
     protected void search(){
         new Thread(new Runnable() {
             @Override
@@ -123,6 +149,13 @@ public class EnhancedActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        if(current == null){
+                            Toast.makeText(getApplicationContext(), R.string.enhanced_error_weather, Toast.LENGTH_SHORT).show();
+                            progress.setIndeterminate(false);
+                            switchUnits.setClickable(true);
+                            isLoading.set(false);
+                            return;
+                        }
                         adapter.setCurrentWeather(current);
                         //now get the forecast
                         new Thread(new Runnable() {
@@ -204,6 +237,58 @@ public class EnhancedActivity extends AppCompatActivity {
             case UNITS_F:
             default:
                 return NetworkConstants.VALUE_IMPERIAL;
+        }
+    }
+
+    /**
+     * Determine if we have permission to access the location manager
+     */
+    protected void checkLocationPermissions(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            getLastKnownLocation();
+        } else if(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            getLastKnownLocation();
+        } else {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == LOCATION_REQUEST_CODE && grantResults.length > 1 && (grantResults[0] == PackageManager.PERMISSION_GRANTED || grantResults[1] == PackageManager.PERMISSION_GRANTED)){
+            getLastKnownLocation();
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.enhanced_error_gps, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * We can reasonably expect that the devices last known location will be close enough to where the user is to not make a difference.
+     * Doing it this way lets us get the location a lot quicker
+     */
+    protected void getLastKnownLocation(){
+        final LocationManager manager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        if(manager != null){
+            //Try gps first, otherwise use network
+            Location location = null;
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
+            if(location == null && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+                location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+            if(location != null && isLoading.compareAndSet(false, true)){
+                lastLat = String.valueOf(location.getLatitude());
+                lastLon = String.valueOf(location.getLongitude());
+                adapter.clearData();
+                progress.setIndeterminate(true);
+                switchUnits.setClickable(false);
+                search();
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.enhanced_error_gps, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.enhanced_error_gps, Toast.LENGTH_SHORT).show();
         }
     }
 }

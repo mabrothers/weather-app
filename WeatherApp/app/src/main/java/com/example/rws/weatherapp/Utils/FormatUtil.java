@@ -14,6 +14,7 @@ import com.example.rws.weatherapp.R;
 public class FormatUtil {
 
     protected static final DecimalFormat TEMP_FORMAT = new DecimalFormat("0");
+    public static final DecimalFormat LOCATION_FORMAT = new DecimalFormat("0.00");
 
     public final static SimpleDateFormat HOURLY_FORMAT = new SimpleDateFormat("h a", Locale.US);
     public final static SimpleDateFormat FULL_DATE_FORMAT = new SimpleDateFormat("EE, MMM d yyyy", Locale.getDefault());

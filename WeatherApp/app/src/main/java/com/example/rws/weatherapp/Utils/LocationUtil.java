@@ -17,8 +17,12 @@ import com.google.gson.Gson;
 
 public class LocationUtil {
 
-
-
+    /**
+     *
+     * @param context Application context is preferred for all network calls
+     * @param placeID returned from Google places Autocomplete
+     * @return Truncated place details from Google
+     */
     public static PlaceDetails getPlace(final Context context, final String placeID){
         final GoogleServerCall serverCall = new GoogleServerCall(context);
         serverCall.endpoint = NetworkConstants.GOOGLE_PLACE_DETAILS_ENDPOINT;
@@ -33,7 +37,12 @@ public class LocationUtil {
         return null;
     }
 
-
+    /**
+     *
+     * @param context Application context is preferred for all network calls
+     * @param query The text to search against
+     * @return A list of suggestions with name and id
+     */
     public static Predictions getSuggestions(final Context context, final String query){
         final GoogleServerCall serverCall = new GoogleServerCall(context);
         serverCall.endpoint = NetworkConstants.GOOGLE_AUTO_COMPLETE_ENDPOINT;

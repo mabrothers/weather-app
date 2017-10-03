@@ -52,5 +52,7 @@
     <string name="mvp_error_input">Please either enter a city or zip code</string>
 
     <string name="enhanced_hint_input">Search Location</string>
+    <string name="enhanced_error_gps">"We're unable to determine your location at this time. Please try again later"</string>
+    <string name="enhanced_error_weather">"We're unable to determine the weather for that location"</string>
 
 </resources>
