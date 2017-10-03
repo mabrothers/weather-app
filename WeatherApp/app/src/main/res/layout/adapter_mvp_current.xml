@@ -22,7 +22,7 @@
 
             <TextView
                 android:id="@+id/lbl_current"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
