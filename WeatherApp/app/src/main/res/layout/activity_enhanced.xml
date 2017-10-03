@@ -27,6 +27,20 @@
                 app:srcCompat="@android:drawable/ic_menu_compass" />
         </android.support.percent.PercentFrameLayout>
 
+
+        <Switch
+            android:id="@+id/switch_units"
+            app:layout_marginEndPercent="2%"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBaseline="@+id/input"
+            android:textColor="@color/white"
+            android:showText="true"
+            android:text="@string/mvp_switch_units"
+            android:textOff="@string/mvp_switch_off"
+            android:textOn="@string/mvp_switch_on"/>
+
         <AutoCompleteTextView
             android:id="@+id/input"
             android:layout_width="match_parent"
@@ -35,23 +49,10 @@
             android:textColorHint="@color/white"
             android:inputType="textCapWords"
             android:hint="@string/enhanced_hint_input"
-            app:layout_marginEndPercent="5%"
+            app:layout_marginEndPercent="2%"
             android:layout_toEndOf="@+id/fl_gps"
-
+            android:layout_toStartOf="@+id/switch_units"
             />
-
-        <Switch
-            android:id="@+id/switch_units"
-            app:layout_widthPercent="25%"
-            app:layout_marginEndPercent="5%"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/input"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/white"
-            android:showText="true"
-            android:text="@string/mvp_switch_units"
-            android:textOff="@string/mvp_switch_off"
-            android:textOn="@string/mvp_switch_on"/>
 
 
         <ProgressBar
@@ -59,7 +60,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/switch_units"
+            android:layout_below="@+id/input"
             android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true" />
 
